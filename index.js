@@ -21,16 +21,16 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    const serviceCollection = client.db("wareHouse").collection("car-service");
+    const serviceCollection = client.db("wareHouse").collection("carServices");
     //Get inventories
-    app.get("/car-service", async (req, res) => {
+    app.get("/carServices", async (req, res) => {
       const query = {};
       const cursor = serviceCollection.find(query);
       const services = await cursor.toArray();
       res.send(services);
     });
     //Send inventories
-    app.post("/car-service", async (req, res) => {
+    app.post("/carServices", async (req, res) => {
       const newInventory = req.body;
       console.log("Adding new inventory", newInventory);
       const result = await serviceCollection.insertOne(newInventory);
@@ -40,7 +40,7 @@ async function run() {
     //Update inventories
     app.put("", (req, res) => {});
     //Delete inventories
-    app.delete("/car-service/:id", async (req, res) => {
+    app.delete("/carServices/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await serviceCollection.deleteOne(query);
