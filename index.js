@@ -48,12 +48,12 @@ async function run() {
     //Update inventory
     app.put("/carServices/:id", async (req, res) => {
       const id = req.params.id;
-      const quantity = id.quantity;
+      const quantity = req.params.quantity;
       const updatedInventory = req.body;
       const query = { _id: ObjectId(id) };
       const options = { upsert: true };
       const updatedItem = {
-        $add: {
+        $set: {
           quantity: updatedInventory.quantity + quantity,
         },
       };
