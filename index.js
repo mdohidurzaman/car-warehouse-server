@@ -29,6 +29,14 @@ async function run() {
       const services = await cursor.toArray();
       res.send(services);
     });
+
+    //Get inventory
+    app.get("/carServices/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await serviceCollection.findOne(query);
+      res.send(result);
+    });
     //Send inventories
     app.post("/carServices", async (req, res) => {
       const newInventory = req.body;
