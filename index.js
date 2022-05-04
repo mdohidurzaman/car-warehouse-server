@@ -54,7 +54,7 @@ async function run() {
       const updatedItem = {
         $set: {
           // name: updatedInventory.name,
-          quantity: updatedInventory.quantity,
+          quantity: updatedInventory + quantity,
         },
       };
       const result = await serviceCollection.updateOne(
