@@ -45,9 +45,26 @@ async function run() {
       res.send(result);
     });
 
-    //Update inventories
-    app.put("", (req, res) => {});
-    //Delete inventories
+    //Update inventory
+    app.put("/carServices/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedInventory = req.body;
+      const query = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updatedItem = {
+        $set: {
+          // name: updatedInventory.name,
+          quantity: updatedInventory.quantity,
+        },
+      };
+      const result = await serviceCollection.updateOne(
+        query,
+        updatedItem,
+        options
+      );
+      res.send(result);
+    });
+    //Delete inventory
     app.delete("/carServices/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
