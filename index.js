@@ -53,8 +53,7 @@ async function run() {
       const query = { _id: ObjectId(id) };
       const options = { upsert: true };
       const updatedItem = {
-        $set: {
-          // name: updatedInventory.name,
+        $add: {
           quantity: updatedInventory.quantity + quantity,
         },
       };
