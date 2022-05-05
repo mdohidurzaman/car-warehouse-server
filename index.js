@@ -53,8 +53,7 @@ async function run() {
       const options = { upsert: true };
       const updatedItem = {
         $set: {
-          // quantity: updatedInventory.quantity,
-          ...updatedInventory,
+          quantity: updatedInventory.quantity,
         },
       };
       const result = await serviceCollection.updateOne(
