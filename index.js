@@ -46,14 +46,14 @@ async function run() {
     });
 
     //Update inventory
-    app.put("/carServices/:id", async (req, res) => {
+    app.patch("/carServices/:id", async (req, res) => {
       const id = req.params.id;
       const updatedInventory = req.body;
       const query = { _id: ObjectId(id) };
       const options = { upsert: true };
       const updatedItem = {
         $set: {
-          quantity: updatedInventory.quantity,
+          quantity: updatedInventory.newQuantity,
         },
       };
       const result = await serviceCollection.updateOne(
