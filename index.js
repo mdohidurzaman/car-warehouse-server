@@ -46,7 +46,7 @@ async function run() {
     });
 
     //Update delivery inventory
-    app.put("/carServices/:id", async (req, res) => {
+    app.patch("/carServices/:id", async (req, res) => {
       const id = req.params.id;
       const updatedInventory = req.body;
       const query = { _id: ObjectId(id) };
