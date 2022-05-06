@@ -45,8 +45,8 @@ async function run() {
       res.send(result);
     });
 
-    //Update inventory
-    app.patch("/carServices/:id", async (req, res) => {
+    //Update delivery inventory
+    app.put("/carServices/:id", async (req, res) => {
       const id = req.params.id;
       const updatedInventory = req.body;
       const query = { _id: ObjectId(id) };
@@ -61,6 +61,31 @@ async function run() {
         updatedItem,
         options
       );
+      res.send(result);
+    });
+    //Update add inventory
+    app.put("/carServices/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedInventory = req.body;
+      const query = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updatedItem = {
+        $set: {
+          quantity: updatedInventory.increaseInventory,
+        },
+      };
+      const result = await serviceCollection.updateOne(
+        query,
+        updatedItem,
+        options
+      );
+      res.send(result);
+    });
+    //Get a login user inventory
+    app.get("/carServices", async (req, res) => {
+      const query = { title: "email" };
+      const cursor = serviceCollection.find(query);
+      const result = await cursor.toArray();
       res.send(result);
     });
     //Delete inventory
