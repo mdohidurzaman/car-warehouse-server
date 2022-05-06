@@ -53,7 +53,7 @@ async function run() {
       const options = { upsert: true };
       const updatedItem = {
         $set: {
-          quantity: updatedInventory.newQuantity,
+          quantity: updatedInventory.quantity,
         },
       };
       const result = await serviceCollection.updateOne(
@@ -81,13 +81,13 @@ async function run() {
       );
       res.send(result);
     });
-    //Get a login user inventory
-    app.get("/carServices", async (req, res) => {
-      const query = { title: "email" };
-      const cursor = serviceCollection.find(query);
-      const result = await cursor.toArray();
-      res.send(result);
-    });
+    // //Get a login user inventory
+    // app.get("/carServices", async (req, res) => {
+    //   const query = { title: "email" };
+    //   const cursor = serviceCollection.find(query);
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+    // });
     //Delete inventory
     app.delete("/carServices/:id", async (req, res) => {
       const id = req.params.id;
