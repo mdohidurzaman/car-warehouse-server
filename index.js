@@ -53,7 +53,7 @@ async function run() {
       const options = { upsert: true };
       const updatedItem = {
         $set: {
-          quantity: updatedInventory.quantity,
+          quantity: updatedInventory.restQuantity,
         },
       };
       const result = await serviceCollection.updateOne(
@@ -71,7 +71,7 @@ async function run() {
       const options = { upsert: true };
       const updatedItem = {
         $set: {
-          quantity: updatedInventory.increaseInventory,
+          quantity: updatedInventory.presentInventory,
         },
       };
       const result = await serviceCollection.updateOne(
