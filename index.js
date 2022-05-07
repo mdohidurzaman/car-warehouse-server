@@ -22,6 +22,11 @@ async function run() {
   try {
     await client.connect();
     const serviceCollection = client.db("wareHouse").collection("carServices");
+    //User login
+    app.post("/login", async (req, res) => {
+      const email = req.body;
+      console.log(email);
+    });
     //Get inventories
     app.get("/carServices", async (req, res) => {
       const query = {};
